@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <main>
         <form action="#" id="searchForm">
             <label for="search">City/Country</label>
             <input type="text" id="search" placeholder="Sydney">
-            <button>Search</button>
+            <button type="submit" id="submitBtn">Search</button>
         </form>
         <div class="weather content" id="currentDayWeather"></div>
     </main>

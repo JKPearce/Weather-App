@@ -1,4 +1,8 @@
 const APP_ID = "286b2e8186f06128e6e0f106f95dd6eb";
+const searchForm = document.getElementById('searchForm');
+const searchBtn = document.getElementById('submitBtn');
+
+searchForm.onsubmit = handleSubmit;
 
 async function getWeatherData(location) {
   try {
@@ -34,6 +38,7 @@ function displayWeather(weather) {
   const feelsLike = document.createElement('p');
   const humidity = document.createElement('p');
 
+  currentWeatherWrapper.innerHTML = '';
   name.innerText = weather.name;
   temp.innerText = "Current Temp: " + weather.temp + "°C";
   condition.innerText = weather.condition;
@@ -46,4 +51,13 @@ function displayWeather(weather) {
   currentWeatherWrapper.appendChild(feelsLike);
   currentWeatherWrapper.appendChild(humidity);
 }
-getWeatherData("Sydney");
+
+function handleSubmit(e){
+  e.preventDefault();
+  const searchData = document.getElementById('search').value;
+  if(!searchData) return;
+  getWeatherData(searchData);
+}
+// getWeatherData("Sydney");
+
+
