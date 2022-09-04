@@ -7,23 +7,43 @@ async function getWeatherData(location) {
     );
     const weatherData = await response.json();
     const processedData = processWeatherData(weatherData);
-    console.log(processedData);
+    displayWeather(processedData);
   } catch (error) {
     console.log(error);
   }
 }
 
-function processWeatherData(data){
-    const weather = {
-        condition: data['weather'][0]['description'],
-        temp: data['main']['temp'],
-        feelsLike: data['main']['feels_like'],
-        tempMin: data['main']['temp_min'],
-        tempMax: data['main']['temp_max'],
-        humidity: data['main']['humidity'],
-        name: data['name']
+function processWeatherData(data) {
+  const weather = {
+    condition: data["weather"][0]["description"],
+    temp: data["main"]["temp"],
+    feelsLike: data["main"]["feels_like"],
+    tempMin: data["main"]["temp_min"],
+    tempMax: data["main"]["temp_max"],
+    humidity: data["main"]["humidity"],
+    name: data["name"],
+  };
+  return weather;
+}
 
-    }
-    return weather;
+function displayWeather(weather) {
+  const currentWeatherWrapper = document.getElementById('currentDayWeather');
+  const name = document.createElement('p');
+  const temp = document.createElement('p');
+  const condition = document.createElement('p');
+  const feelsLike = document.createElement('p');
+  const humidity = document.createElement('p');
+
+  name.innerText = weather.name;
+  temp.innerText = "Current Temp: " + weather.temp + "°C";
+  condition.innerText = weather.condition;
+  feelsLike.innerText = "Feels like: " + weather.feelsLike + "°C";
+  humidity.innerText = "Humidity: " + weather.humidity + "%";
+
+  currentWeatherWrapper.appendChild(name);
+  currentWeatherWrapper.appendChild(temp);
+  currentWeatherWrapper.appendChild(condition);
+  currentWeatherWrapper.appendChild(feelsLike);
+  currentWeatherWrapper.appendChild(humidity);
 }
 getWeatherData("Sydney");
